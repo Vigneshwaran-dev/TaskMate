@@ -166,6 +166,28 @@ UpdateGroup.set_defaults(func=UpdateTask)
 # === === update Task group === === 
 
 
+def DeleteTask(args):
+
+    if args.id:
+        try:
+            with open('log.json','r') as JSONFile:
+                AllTaskList = json.load(JSONFile)
+        except FileNotFoundError:
+            print('Add a task first to delete')
+        
+        deletedtask = AllTaskList.pop(int(str(args.id))-1)
+        print(f"{deletedtask["TaskName"]} has been successfully deleted")
+
+        with open('log.json','w') as JSONFile:
+            json.dump(AllTaskList,JSONFile,indent=4)
+
+    else:
+        User = input("Do you want to delete all the task's (Y/n) : ")
+        if User.lower() == 'Y':
+            with open('log.json','w') as JSONFile:
+                json.dump([],JSONFile,indent=4)
+        print("All Task's has been successfully deleted")
+
 Deleteparser = SubParser.add_parser('delete')
 DeleteGroup = Deleteparser.add_argument_group("Delete Your Task's")
 

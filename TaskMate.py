@@ -203,7 +203,7 @@ DeleteGroup.set_defaults(func=DeleteTask)
 
 def MarkStatus(args):
     TaskId = int(str(args.id))
-    TaskStatus = int(str(args.status))
+    TaskStatus = str(args.status)
 
     try:
         with open('log.json','r') as JSONFile:
@@ -214,6 +214,8 @@ def MarkStatus(args):
     for TaskDict in AllTaskList:
         if TaskDict['TaskId'] == TaskId:
             TaskDict['TaskStatus'] = TaskStatus
+            TaskDict['LastUpdatedTime'] = CurrentTime()
+            print("Task Status changed successfully")
         
     with open('log.json','w') as JSONFile:
         json.dump(AllTaskList,JSONFile,indent=4)

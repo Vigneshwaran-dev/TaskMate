@@ -50,7 +50,7 @@ def AddTask(args):
             AlltaskList = json.load(JSONFile)
     except json.JSONDecodeError:
         AlltaskList = []
-        AlltaskList.append(TaskList)
+    AlltaskList.append(TaskList)
     
     with open('log.json','w') as JSONFile:
         json.dump(AlltaskList,JSONFile)

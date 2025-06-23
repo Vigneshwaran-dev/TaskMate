@@ -91,7 +91,18 @@ def ListFilter(filter):
     print(tabulate(Listed,Headers,tablefmt="rounded_grid"))
 
 def ListAll():
-    pass
+    try:
+        with open('log.json','r') as JSONFile:
+            AllTaskList = json.load(JSONFile)
+    except FileNotFoundError:
+        print("Add a Task first to list")
+    
+    Listed = []
+
+    for Taskdict in AllTaskList:
+        Listed.append(list(Taskdict.values()))
+    
+    print(tabulate(Listed,Headers,tablefmt="rounded_grid"))
 
 def ListTask(args):
     if args.filter:

@@ -1,5 +1,5 @@
 import argparse
-import pickle
+import json
 from datetime import datetime
 
 Parser = argparse.ArgumentParser(prog="TaskMate",
@@ -27,18 +27,30 @@ def CurrentTime():
 
 def UpdateId():
     try:
-        with open("id.bin","wb+") as BinFile:
-            IdList = pickle.load(BinFile)
-    except EOFError:
+        with open("id.json","w+") as JsonFile:
+            IdList = json.load(JsonFile)
+    except json.JSONDecodeError:
         IdList = [0]
     
     CurrentId = IdList[0] + 1
     IdList.insert(0,CurrentId)
-    with open("id.bin",'wb') as BinFile:
-        pickle.dump(IdList,BinFile)
+    with open("id.json",'w') as JsonFile:
+        json.dump(IdList,JsonFile)
+    
+    return CurrentId
 
 def AddTask(args):
-    pass
+    currenttime = CurrentTime()
+    currentid = UpdateId()
+
+    TaskList = [currentid,args.name,args.description,args.status,args.priority,currenttime]
+
+    try:
+        with open("log.json",'w+') as JSONFile:
+            AlltaskList = json.load(JSONFile)
+    except json.JSONDecodeError:
+        AlltaskList = []
+        AlltaskList.append(TaskList)
 
 
 AddParser = SubParser.add_parser("add")

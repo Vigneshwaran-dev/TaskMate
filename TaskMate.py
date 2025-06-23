@@ -162,5 +162,16 @@ UpdateGroup.add_argument('-p','--NewPriority')
 
 UpdateGroup.set_defaults(func=UpdateTask)
 
+# add delte statuschange sort 
+# === === update Task group === === 
+
+
+Deleteparser = SubParser.add_parser('delete')
+DeleteGroup = Deleteparser.add_argument_group("Delete Your Task's")
+
+DeleteGroup.add_argument('id',help="Enter The Id of the task to delete",nargs='?')
+
+DeleteGroup.set_defaults(func=DeleteTask)
+
 args = Parser.parse_args()
 args.func(args)

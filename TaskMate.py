@@ -162,7 +162,7 @@ UpdateGroup.add_argument('-p','--NewPriority')
 
 UpdateGroup.set_defaults(func=UpdateTask)
 
-# add statuschange sort 
+
 # === === delete Task group === === 
 
 
@@ -228,6 +228,21 @@ MarkStatusGroup.add_argument('status',choices=["Done","Todo","In-progress"],help
 
 MarkStatusGroup.set_defaults(func=MarkStatus)
 
+
+
+# === === Sort task === ===
+
+
+def SortTask(args):
+    pass
+
+SortParser = SubParser.add_parser('sort')
+SortGroup = SortParser.add_argument_group('Sort Your task based on Status and Priority')
+
+
+SortGroup.add_argument()
+
+SortGroup.set_defaults(func=SortTask)
 
 args = Parser.parse_args()
 args.func(args)

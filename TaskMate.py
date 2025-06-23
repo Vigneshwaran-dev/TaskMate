@@ -123,8 +123,8 @@ Listgroup.set_defaults(func=ListTask)
 
 
 def UpdateTask(args):
-    TaskId = args.id
-
+    TaskId = int(str(args.id))
+    print(args)
     try:
         with open('log.json','r') as JSONFile:
             AllTaskList = json.load(JSONFile)
@@ -144,8 +144,10 @@ def UpdateTask(args):
             AllTaskList.pop(TaskId)
             AllTaskList.insert(TaskId,Taskdict)
     
-    with open('lig.json','w') as JSONFile:
+    with open('log.json','w') as JSONFile:
         json.dump(AllTaskList,JSONFile,indent=4)
+    
+    print('Task Edited Successfully')
 
 UpdateParser = SubParser.add_parser('update')
 UpdateGroup = UpdateParser.add_argument_group("Update your Task's")

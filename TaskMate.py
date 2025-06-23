@@ -35,7 +35,7 @@ def UpdateId():
     CurrentId = IdList[0] + 1
     IdList.insert(0,CurrentId)
     with open("id.json",'w') as JSONFile:
-        json.dump(IdList,JSONFile)
+        json.dump(IdList,JSONFile,indent=4)
     
     return CurrentId
 
@@ -53,7 +53,7 @@ def AddTask(args):
     AlltaskList.append(TaskList)
     
     with open('log.json','w') as JSONFile:
-        json.dump(AlltaskList,JSONFile)
+        json.dump(AlltaskList,JSONFile,indent=4)
     print(f"Task Created Successfully (ID: {currentid})")
 
 

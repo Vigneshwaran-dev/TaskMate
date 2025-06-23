@@ -27,9 +27,9 @@ def CurrentTime():
 
 def UpdateId():
     try:
-        with open("id.json","a+") as JSONFile:
+        with open("id.json","r") as JSONFile:
             IdList = json.load(JSONFile)
-    except json.JSONDecodeError:
+    except FileNotFoundError:
         IdList = [0]
     
     CurrentId = IdList[0] + 1
@@ -46,9 +46,9 @@ def AddTask(args):
     TaskList = [currentid,args.name,args.description,args.status,args.priority,currenttime]
 
     try:
-        with open("log.json",'a+') as JSONFile:
+        with open("log.json",'r') as JSONFile:
             AlltaskList = json.load(JSONFile)
-    except json.JSONDecodeError:
+    except FileNotFoundError:
         AlltaskList = []
     AlltaskList.append(TaskList)
     

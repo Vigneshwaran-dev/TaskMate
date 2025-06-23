@@ -1,4 +1,5 @@
 import argparse
+import pickle
 from datetime import datetime
 
 Parser = argparse.ArgumentParser(prog="TaskMate",
@@ -23,6 +24,18 @@ def CurrentTime():
 
     currenttime = TimeStr%TimeVal
     return currenttime
+
+def UpdateId():
+    try:
+        with open("id.bin","wb+") as BinFile:
+            IdList = pickle.load(BinFile)
+    except EOFError:
+        IdList = [0]
+    
+    CurrentId = IdList[0] + 1
+    IdList.insert(0,CurrentId)
+    with open("id.bin",'wb') as BinFile:
+        pickle.dump(IdList,BinFile)
 
 def AddTask(args):
     pass

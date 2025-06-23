@@ -46,7 +46,7 @@ def AddTask(args):
     currenttime = CurrentTime()
     currentid = UpdateId()
 
-    TaskList = {"TaskId":currentid,"Taskname":args.name,"Taskdescription":args.description,"TaskStatus":args.status,"TaskPriority":args.priority,"CreatedTime":currenttime}
+    TaskList = {"TaskId":currentid,"TaskName":args.name,"TaskDescription":args.description,"TaskStatus":args.status,"TaskPriority":args.priority,"CreatedTime":currenttime}
 
     try:
         with open("log.json",'r') as JSONFile:
@@ -120,11 +120,40 @@ Listgroup.set_defaults(func=ListTask)
 
 # === === update Task group === === 
 
+
+
+def UpdateTask(args):
+    TaskId = args.id
+
+    try:
+        with open('log.json','r') as JSONFile:
+            AllTaskList = json.load(JSONFile)
+    except FileNotFoundError:
+        print("Add a Task first to update")
+
+    for Taskdict in AllTaskList:
+        if Taskdict['TaskId'] == int(str(TaskId)):
+            
+            if args.NewName:
+                Taskdict["TaskName"] = str(args.NewName)
+            if args.NewDescription:
+                Taskdict["TaskDescription"] = str(args.NewDescription)
+            if args.NewPriority:
+                Taskdict["TaskPriority"] = str(args.NewPriority)
+
+            AllTaskList.pop(TaskId)
+            AllTaskList.insert(TaskId,Taskdict)
+    
+    with open('lig.json','w') as JSONFile:
+        json.dump(AllTaskList,JSONFile,indent=4)
+
 UpdateParser = SubParser.add_parser('update')
 UpdateGroup = UpdateParser.add_argument_group("Update your Task's")
 
 UpdateGroup.add_argument('id')
-UpdateGroup.add_argument('criteria',choices=['name','description','priority'])
+UpdateGroup.add_argument('-n','--NewName')
+UpdateGroup.add_argument('-d','--NewDescription')
+UpdateGroup.add_argument('-p','--NewPriority')
 
 UpdateGroup.set_defaults(func=UpdateTask)
 

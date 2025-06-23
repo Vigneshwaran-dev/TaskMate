@@ -202,12 +202,27 @@ DeleteGroup.set_defaults(func=DeleteTask)
 
 
 def MarkStatus(args):
-    pass
+    TaskId = int(str(args.id))
+    TaskStatus = int(str(args.status))
+
+    try:
+        with open('log.json','r') as JSONFile:
+            AllTaskList = json.load(JSONFile)
+    except FileNotFoundError:
+        print("Add the Task First to change the status")
+
+    for TaskDict in AllTaskList:
+        if TaskDict['TaskId'] == TaskId:
+            TaskDict['TaskStatus'] = TaskStatus
+        
+    with open('log.json','w') as JSONFile:
+        json.dump(AllTaskList,JSONFile,indent=4)
 
 MarkStatusParser = SubParser.add_parser('mark')
 MarkStatusGroup = MarkStatusParser.add_argument_group('Change the status of your Task')
 
-MarkStatusGroup.add_argument()
+MarkStatusGroup.add_argument('id',help="Enter Your Task Id to change status")
+MarkStatusGroup.add_argument('status',choices=["Done","Todo","In-progress"],help="Enter the task status to be changed")
 
 MarkStatusGroup.set_defaults(func=MarkStatus)
 

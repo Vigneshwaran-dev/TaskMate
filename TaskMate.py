@@ -43,7 +43,7 @@ def AddTask(args):
     currenttime = CurrentTime()
     currentid = UpdateId()
 
-    TaskList = [currentid,args.name,args.description,args.status,args.priority,currenttime]
+    TaskList = {"TaskId":currentid,"Taskname":args.name,"Taskdescription":args.description,"TaskStatus":args.status,"TaskPriority":args.priority,"CreatedTime":currenttime}
 
     try:
         with open("log.json",'r') as JSONFile:

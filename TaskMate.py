@@ -27,15 +27,15 @@ def CurrentTime():
 
 def UpdateId():
     try:
-        with open("id.json","w+") as JsonFile:
-            IdList = json.load(JsonFile)
+        with open("id.json","w+") as JSONFile:
+            IdList = json.load(JSONFile)
     except json.JSONDecodeError:
         IdList = [0]
     
     CurrentId = IdList[0] + 1
     IdList.insert(0,CurrentId)
-    with open("id.json",'w') as JsonFile:
-        json.dump(IdList,JsonFile)
+    with open("id.json",'w') as JSONFile:
+        json.dump(IdList,JSONFile)
     
     return CurrentId
 
@@ -51,6 +51,10 @@ def AddTask(args):
     except json.JSONDecodeError:
         AlltaskList = []
         AlltaskList.append(TaskList)
+    
+    with open('log.json','w') as JSONFile:
+        json.dump(AlltaskList,JSONFile)
+    print(f"Task Created Successfully (ID: {currentid})")
 
 
 AddParser = SubParser.add_parser("add")

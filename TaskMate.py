@@ -117,5 +117,16 @@ Listgroup.add_argument("filter",choices=['Done','In-progress','Todo'],nargs='?')
 
 Listgroup.set_defaults(func=ListTask)
 
+
+# === === update Task group === === 
+
+UpdateParser = SubParser.add_parser('update')
+UpdateGroup = UpdateParser.add_argument_group("Update your Task's")
+
+UpdateGroup.add_argument('id')
+UpdateGroup.add_argument('criteria',choices=['name','description','priority'])
+
+UpdateGroup.set_defaults(func=UpdateTask)
+
 args = Parser.parse_args()
 args.func(args)

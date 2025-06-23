@@ -3,7 +3,7 @@ import json
 from tabulate import tabulate
 from datetime import datetime
 
-Headers = ["Id","Task Name","Description","Status","Priority","Created at"]
+Headers = ["Id","Task Name","Description","Status","Priority","Created at","Last Updated at"]
 
 Parser = argparse.ArgumentParser(prog="TaskMate",
                                  description="Manage Your Everyday Tasks with ease",
@@ -46,7 +46,7 @@ def AddTask(args):
     currenttime = CurrentTime()
     currentid = UpdateId()
 
-    TaskList = {"TaskId":currentid,"TaskName":args.name,"TaskDescription":args.description,"TaskStatus":args.status,"TaskPriority":args.priority,"CreatedTime":currenttime}
+    TaskList = {"TaskId":currentid,"TaskName":args.name,"TaskDescription":args.description,"TaskStatus":args.status,"TaskPriority":args.priority,"CreatedTime":currenttime,"LastUpdatedTime":currenttime}
 
     try:
         with open("log.json",'r') as JSONFile:
@@ -136,10 +136,13 @@ def UpdateTask(args):
             
             if args.NewName:
                 Taskdict["TaskName"] = str(args.NewName)
+                Taskdict['LastUpdatedTime'] = CurrentTime()
             if args.NewDescription:
                 Taskdict["TaskDescription"] = str(args.NewDescription)
+                Taskdict['LastUpdatedTime'] = CurrentTime()
             if args.NewPriority:
                 Taskdict["TaskPriority"] = str(args.NewPriority)
+                Taskdict['LastUpdatedTime'] = CurrentTime()
 
             AllTaskList.pop(TaskId-1)
             AllTaskList.insert(TaskId-1,Taskdict)

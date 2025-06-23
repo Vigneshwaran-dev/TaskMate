@@ -82,8 +82,8 @@ def ListFilter(filter):
     Listed = []
 
     for Taskdict in AllTaskList:
-        if Taskdict[TaskStatus] == str(filter):
-            Listed.append(Taskdict.values())
+        if Taskdict['TaskStatus'] == str(filter):
+            Listed.append(list(Taskdict.values()))
     
     print(Listed)
 

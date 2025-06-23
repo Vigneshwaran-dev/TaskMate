@@ -1,4 +1,5 @@
 import argparse
+from datetime import datetime
 
 Parser = argparse.ArgumentParser(prog="TaskMate",
                                  description="Manage Your Everyday Tasks with ease",
@@ -7,6 +8,21 @@ SubParser = Parser.add_subparsers(title="Sub-Commands",help="Commands to perform
 
 
 # === === Add Task group === === 
+
+
+def CurrentTime():
+    x = datetime.now()
+    TimeStr = "%s %s %s %s %s:%s %s"
+    TimeVal = (x.strftime('%d'),
+               x.strftime('%b'),
+               x.strftime('%Y'),
+               x.strftime('%a'),
+               x.strftime('%I'),
+               x.strftime('%M'),
+               x.strftime('%p'))
+
+    currenttime = TimeStr%TimeVal
+    return currenttime
 
 def AddTask(args):
     pass

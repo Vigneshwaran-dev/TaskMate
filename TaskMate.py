@@ -124,7 +124,7 @@ Listgroup.set_defaults(func=ListTask)
 
 def UpdateTask(args):
     TaskId = int(str(args.id))
-    print(args)
+
     try:
         with open('log.json','r') as JSONFile:
             AllTaskList = json.load(JSONFile)
@@ -141,8 +141,8 @@ def UpdateTask(args):
             if args.NewPriority:
                 Taskdict["TaskPriority"] = str(args.NewPriority)
 
-            AllTaskList.pop(TaskId)
-            AllTaskList.insert(TaskId,Taskdict)
+            AllTaskList.pop(TaskId-1)
+            AllTaskList.insert(TaskId-1,Taskdict)
     
     with open('log.json','w') as JSONFile:
         json.dump(AllTaskList,JSONFile,indent=4)

@@ -233,20 +233,48 @@ MarkStatusGroup.set_defaults(func=MarkStatus)
 # === === Sort task === ===
 
 
-def SortTask(args):
-    pass
+def SortTask(default):
+
+    with open("log.json",'r') as JSONFile:
+        AllTaskList = json.load(JSONFile)
+
+    Sorted = []
+
+    for status in default:
+        for TaskDict in AllTaskList:
+            if TaskDict["TaskStatus"] == status:
+                Sorted.append(list(TaskDict.values()))
+    
+    print(tabulate(Sorted,Headers,tablefmt="rounded_grid"))
+
+def SortTaskMain(args):
+
+    Priority = ["High","Medium","Low"]
+    PriorityR = ["Low","Medium","High"]
+    Status = ['Todo','In-progress','Done']
+    StatusR = ['Done','In-progress','Todo']
+
+    if args.status_todo_done:
+        SortTask(Status)
+    if args.status_done_todo:
+        SortTask(StatusR)
+    if args.priority_high_low:
+        SortTask(Priority)
+    if args.priority_low_high:
+        SortTask(PriorityR)
+
 
 SortParser = SubParser.add_parser('sort')
 SortGroup = SortParser.add_argument_group('Sort Your task based on Status and Priority')
 
 
-SortGroup.add_argument('-s',"--status_todo_done",help="Sort Your Task Based on Status (Todo to Done)")
-SortGroup.add_argument('-S',"--status_done_todo",help="Sort Your Task Based on Status (Done to Todo)")
+SortGroup.add_argument('-s',"--status_todo_done",action="store_true",help="Sort Your Task Based on Status (Todo to Done)")
+SortGroup.add_argument('-S',"--status_done_todo",action="store_true",help="Sort Your Task Based on Status (Done to Todo)")
 
-SortGroup.add_argument('-p',"--priority_high_low",help="SOrt Your Task based on Priority (High to Low)")
-SortGroup.add_argument('-P',"--priority_low_high",help="SOrt Your Task based on Priority (Low to High)")
+SortGroup.add_argument('-p',"--priority_high_low",action="store_true",help="SOrt Your Task based on Priority (High to Low)")
+SortGroup.add_argument('-P',"--priority_low_high",action="store_true",help="SOrt Your Task based on Priority (Low to High)")
 
-SortGroup.set_defaults(func=SortTask)
+SortGroup.set_defaults(func=SortTaskMain)
 
 args = Parser.parse_args()
 args.func(args)

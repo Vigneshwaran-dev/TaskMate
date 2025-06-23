@@ -70,8 +70,34 @@ AddGroup.set_defaults(func=AddTask)
 
 # === === list Task group === === 
 
+
+
+def ListFilter(filter):
+    try:
+        with open('log.json','r') as JSONFile:
+            AllTaskList = json.load(JSONFile)
+    except FileNotFoundError:
+        print("Add a Task first to list")
+    
+    Listed = []
+
+    for Taskdict in AllTaskList:
+        if Taskdict[TaskStatus] == str(filter):
+            Listed.append(Taskdict.values())
+    
+    print(Listed)
+
+def ListAll():
+    pass
+
+def ListTask(args):
+    if args.filter:
+        ListFilter(args.filter)
+    else:
+        ListAll()
+
 ListParser = SubParser.add_parser('list')
-Listgroup = ListParser.add_argument_group("List Your tasks")
+Listgroup = ListParser.add_argument_group("List Your tasks based on Status")
 
 Listgroup.add_argument("filter",choices=['Done','In-progress','Todo'],nargs='?')
 

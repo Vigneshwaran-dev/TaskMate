@@ -1,6 +1,9 @@
 import argparse
 import json
+from tabulate import tabulate
 from datetime import datetime
+
+Headers = ["Id","Task Name","Description","Status","Priority","Created at"]
 
 Parser = argparse.ArgumentParser(prog="TaskMate",
                                  description="Manage Your Everyday Tasks with ease",

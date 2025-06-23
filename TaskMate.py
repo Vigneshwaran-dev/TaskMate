@@ -8,6 +8,10 @@ SubParser = Parser.add_subparsers(title="Sub-Commands",help="Commands to perform
 
 # === === Add Task group === === 
 
+def AddTask(args):
+    pass
+
+
 AddParser = SubParser.add_parser("add")
 AddGroup = AddParser.add_argument_group()
 

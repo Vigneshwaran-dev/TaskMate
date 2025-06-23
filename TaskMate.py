@@ -162,8 +162,8 @@ UpdateGroup.add_argument('-p','--NewPriority')
 
 UpdateGroup.set_defaults(func=UpdateTask)
 
-# add delte statuschange sort 
-# === === update Task group === === 
+# add statuschange sort 
+# === === delete Task group === === 
 
 
 def DeleteTask(args):
@@ -197,6 +197,19 @@ DeleteGroup.add_argument('id',help="Enter The Id of the task to delete",nargs='?
 
 DeleteGroup.set_defaults(func=DeleteTask)
 
+
+# === === mark status Task group === === 
+
+
+def MarkStatus(args):
+    pass
+
+MarkStatusParser = SubParser.add_parser('mark')
+MarkStatusGroup = MarkStatusParser.add_argument_group('Change the status of your Task')
+
+MarkStatusGroup.add_argument()
+
+MarkStatusGroup.set_defaults(func=MarkStatus)
 
 
 args = Parser.parse_args()

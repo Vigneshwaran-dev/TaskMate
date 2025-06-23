@@ -88,7 +88,7 @@ def ListFilter(filter):
         if Taskdict['TaskStatus'] == str(filter):
             Listed.append(list(Taskdict.values()))
     
-    print(Listed)
+    print(tabulate(Listed,Headers,tablefmt="rounded_grid"))
 
 def ListAll():
     pass

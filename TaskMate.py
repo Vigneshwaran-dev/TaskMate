@@ -54,7 +54,7 @@ def AddTask(args):
 
 
 AddParser = SubParser.add_parser("add")
-AddGroup = AddParser.add_argument_group()
+AddGroup = AddParser.add_argument_group("Add Your Task's")
 
 AddGroup.add_argument("name",help="Add Your Task Name")
 AddGroup.add_argument("-d","--description",help="Add Your Task Description")

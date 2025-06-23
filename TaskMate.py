@@ -186,7 +186,9 @@ def DeleteTask(args):
         if User.lower() == 'Y':
             with open('log.json','w') as JSONFile:
                 json.dump([],JSONFile,indent=4)
-        print("All Task's has been successfully deleted")
+            print("All Task's has been successfully deleted")
+        else:
+            print('Woof!, What a close save')
 
 Deleteparser = SubParser.add_parser('delete')
 DeleteGroup = Deleteparser.add_argument_group("Delete Your Task's")
@@ -194,6 +196,8 @@ DeleteGroup = Deleteparser.add_argument_group("Delete Your Task's")
 DeleteGroup.add_argument('id',help="Enter The Id of the task to delete",nargs='?')
 
 DeleteGroup.set_defaults(func=DeleteTask)
+
+
 
 args = Parser.parse_args()
 args.func(args)

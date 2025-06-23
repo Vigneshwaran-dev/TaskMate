@@ -67,5 +67,15 @@ AddGroup.add_argument("-p","--priority",choices=["Low","Medium","High"],default=
 
 AddGroup.set_defaults(func=AddTask)
 
+
+# === === list Task group === === 
+
+ListParser = SubParser.add_parser('list')
+Listgroup = ListParser.add_argument_group("List Your tasks")
+
+Listgroup.add_argument("filter",choices=['Done','In-progress','Todo'],nargs='?')
+
+Listgroup.set_defaults(func=ListTask)
+
 args = Parser.parse_args()
 args.func(args)

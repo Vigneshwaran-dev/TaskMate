@@ -240,7 +240,11 @@ SortParser = SubParser.add_parser('sort')
 SortGroup = SortParser.add_argument_group('Sort Your task based on Status and Priority')
 
 
-SortGroup.add_argument()
+SortGroup.add_argument('-s',"--status_todo_done",help="Sort Your Task Based on Status (Todo to Done)")
+SortGroup.add_argument('-S',"--status_done_todo",help="Sort Your Task Based on Status (Done to Todo)")
+
+SortGroup.add_argument('-p',"--priority_high_low",help="SOrt Your Task based on Priority (High to Low)")
+SortGroup.add_argument('-P',"--priority_low_high",help="SOrt Your Task based on Priority (Low to High)")
 
 SortGroup.set_defaults(func=SortTask)
 

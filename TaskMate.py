@@ -62,8 +62,8 @@ AddGroup = AddParser.add_argument_group("Add Your Task's")
 
 AddGroup.add_argument("name",help="Add Your Task Name")
 AddGroup.add_argument("-d","--description",help="Add Your Task Description")
-AddGroup.add_argument("-s","--status",help="Add Your Task Status")
-AddGroup.add_argument("-p","--priority",help="Add Your Task Priority")
+AddGroup.add_argument("-s","--status",choices=["Todo","In-progress","Done"],default="Todo",help="Add Your Task Status")
+AddGroup.add_argument("-p","--priority",choices=["Low","Medium","High"],default="Low",help="Add Your Task Priority")
 
 AddGroup.set_defaults(func=AddTask)
 

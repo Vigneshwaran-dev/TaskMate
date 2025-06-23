@@ -113,7 +113,7 @@ def ListTask(args):
 ListParser = SubParser.add_parser('list')
 Listgroup = ListParser.add_argument_group("List Your tasks based on Status")
 
-Listgroup.add_argument("filter",choices=['Done','In-progress','Todo'],nargs='?')
+Listgroup.add_argument("filter",choices=['Done','In-progress','Todo'],nargs='?',help="Enter the option to list (Done,In-progress,Todo)")
 
 Listgroup.set_defaults(func=ListTask)
 
@@ -155,10 +155,10 @@ def UpdateTask(args):
 UpdateParser = SubParser.add_parser('update')
 UpdateGroup = UpdateParser.add_argument_group("Update your Task's")
 
-UpdateGroup.add_argument('id')
-UpdateGroup.add_argument('-n','--NewName')
-UpdateGroup.add_argument('-d','--NewDescription')
-UpdateGroup.add_argument('-p','--NewPriority')
+UpdateGroup.add_argument('id',help="Enter the Id of the Task to update")
+UpdateGroup.add_argument('-n','--NewName',help="Enter the New Name of the Task")
+UpdateGroup.add_argument('-d','--NewDescription',help="Enter the new Description of the Task")
+UpdateGroup.add_argument('-p','--NewPriority',help="Enter the new Priority of the Task")
 
 UpdateGroup.set_defaults(func=UpdateTask)
 

@@ -37,10 +37,11 @@ def UpdateId():
     try:
         with open(f"{path}/id.json","r") as JSONFile:
             IdList = json.load(JSONFile)
+            CurrentId = IdList[0] + 1
     except:
         IdList = [0]
+        CurrentId = IdList[0] + 1
     
-    CurrentId = IdList[0] + 1
     IdList.insert(0,CurrentId)
     with open(f"{path}/id.json",'w') as JSONFile:
         json.dump(IdList,JSONFile,indent=4)

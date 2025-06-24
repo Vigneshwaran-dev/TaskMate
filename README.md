@@ -33,10 +33,9 @@ TaskMate add <TaskName>
 ```
 TaskMate add <TaskName> -d <description> -s <status> -p <priority>
 ```
-<h4>Note : status only accepts ['In-progress','Done','Todo'] defult = Todo (case-senstitve) 
+<h4>Note : status only accepts ['in-progress','done','todo'] defult = todo
 </br>
-Priority only accepts ["Low","Medium","High"] default="Low"
-(case-senstitve) </h4>
+Priority only accepts ["low","medium","high"] default="low"</h4>
 <h3>Update a Task</h3>
 
 - Update Name
@@ -69,15 +68,15 @@ TaskMate list
 - List Task Based on their Status
 
 ```
-TaskMate List Done 
+TaskMate List done 
 ```
 
 ```
-TaskMate List In-progress 
+TaskMate List in-progress 
 ```
 
 ```
-TaskMate List Todo 
+TaskMate List todo 
 ```
 </br>
 <h3>Delete Task's</h3>
@@ -97,28 +96,28 @@ TaskMate delete
 ```
 TaskMate mark <TaskId> <NewStatus>
 ```
-The New Status only accepts Done , Todo , In-progress
+The New Status only accepts done , todo , in-progress
 </br>
 <h3>Veiw Sort the Tasks </h3>
 
 - Sort Tasks based on their Status
-    - Todo - In-progress -Done
+    - todo - in-progress -done
 
     ```
     TaskMate sort -s
     ```
-    - Done - In-progress - Done
+    - done - in-progress - done
 
     ```
     TaskMate sort -S
     ```
 - Sort Tasks based on their Priority
-    - High - Medium - Low
+    - high - medium - low
 
     ```
     TaskMate sort -p
     ```
-    - Low - Medium - High
+    - low - medium - high
 
     ```
     TaskMate sort -P

@@ -37,7 +37,7 @@ def UpdateId():
     try:
         with open(f"{path}/id.json","r") as JSONFile:
             IdList = json.load(JSONFile)
-    except FileNotFoundError:
+    except:
         IdList = [0]
     
     CurrentId = IdList[0] + 1
@@ -56,7 +56,7 @@ def AddTask(args):
     try:
         with open(f"{path}/log.json",'r') as JSONFile:
             AlltaskList = json.load(JSONFile)
-    except FileNotFoundError:
+    except :
         AlltaskList = []
     AlltaskList.append(TaskList)
     

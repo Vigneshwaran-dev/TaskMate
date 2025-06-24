@@ -197,8 +197,8 @@ def DeleteTask(args):
             json.dump(AllIdList,IdFile,indent=4)
 
     else:
-        User = input("Do you want to delete all the task's (Y/n) : ")
-        if User.lower() == 'Y':
+        User = input("Do you want to delete all the task's (y/n) : ")
+        if User == 'y':
             with open(f'{path}/log.json','w') as JSONFile:
                 json.dump([],JSONFile,indent=4)
             with open(f'{path}/id.json','w') as IdFIle:

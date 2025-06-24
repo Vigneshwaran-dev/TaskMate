@@ -67,8 +67,8 @@ AddGroup = AddParser.add_argument_group("Add Your Task's")
 
 AddGroup.add_argument("name",help="Add Your Task Name")
 AddGroup.add_argument("-d","--description",help="Add Your Task Description")
-AddGroup.add_argument("-s","--status",choices=["Todo","In-progress","Done"],default="Todo",help="Add Your Task Status")
-AddGroup.add_argument("-p","--priority",choices=["Low","Medium","High"],default="Low",help="Add Your Task Priority")
+AddGroup.add_argument("-s","--status",choices=["todo","in-progress","done"],default="todo",help="Add Your Task Status")
+AddGroup.add_argument("-p","--priority",choices=["low","medium","high"],default="low",help="Add Your Task Priority")
 
 AddGroup.set_defaults(func=AddTask)
 
@@ -115,7 +115,7 @@ def ListTask(args):
 ListParser = SubParser.add_parser('list')
 Listgroup = ListParser.add_argument_group("List Your tasks based on Status")
 
-Listgroup.add_argument("filter",choices=['Done','In-progress','Todo'],nargs='?',help="Enter the option to list (Done,In-progress,Todo)")
+Listgroup.add_argument("filter",choices=['done','in-progress','todo'],nargs='?',help="Enter the option to list (done,in-progress,todo)")
 
 Listgroup.set_defaults(func=ListTask)
 
@@ -238,7 +238,7 @@ MarkStatusParser = SubParser.add_parser('mark')
 MarkStatusGroup = MarkStatusParser.add_argument_group('Change the status of your Task')
 
 MarkStatusGroup.add_argument('id',help="Enter Your Task Id to change status")
-MarkStatusGroup.add_argument('status',choices=["Done","Todo","In-progress"],help="Enter the task status to be changed")
+MarkStatusGroup.add_argument('status',choices=["done","todo","in-progress"],help="Enter the task status to be changed")
 
 MarkStatusGroup.set_defaults(func=MarkStatus)
 
@@ -268,10 +268,10 @@ def SortTask(default,status=False,priority=False):
 
 def SortTaskMain(args):
 
-    Priority = ["High","Medium","Low"]
-    PriorityR = ["Low","Medium","High"]
-    Status = ['Todo','In-progress','Done']
-    StatusR = ['Done','In-progress','Todo']
+    Priority = ["high","medium","low"]
+    PriorityR = ["low","medium","high"]
+    Status = ['todo','in-progress','done']
+    StatusR = ['done','in-progress','todo']
 
     if args.status_todo_done:
         SortTask(Status,status=True)
@@ -287,11 +287,11 @@ SortParser = SubParser.add_parser('sort')
 SortGroup = SortParser.add_argument_group('Sort Your task based on Status and Priority')
 
 
-SortGroup.add_argument('-s',"--status_todo_done",action="store_true",help="Sort Your Task Based on Status (Todo to Done)")
-SortGroup.add_argument('-S',"--status_done_todo",action="store_true",help="Sort Your Task Based on Status (Done to Todo)")
+SortGroup.add_argument('-s',"--status_todo_done",action="store_true",help="Sort Your Task Based on Status (todo to done)")
+SortGroup.add_argument('-S',"--status_done_todo",action="store_true",help="Sort Your Task Based on Status (done to todo)")
 
-SortGroup.add_argument('-p',"--priority_high_low",action="store_true",help="Sort Your Task based on Priority (High to Low)")
-SortGroup.add_argument('-P',"--priority_low_high",action="store_true",help="Sort Your Task based on Priority (Low to High)")
+SortGroup.add_argument('-p',"--priority_high_low",action="store_true",help="Sort Your Task based on Priority (high to low)")
+SortGroup.add_argument('-P',"--priority_low_high",action="store_true",help="Sort Your Task based on Priority (low to high)")
 
 SortGroup.set_defaults(func=SortTaskMain)
 

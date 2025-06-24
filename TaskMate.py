@@ -4,6 +4,9 @@ import argparse
 import json
 from tabulate import tabulate
 from datetime import datetime
+import os
+
+path = os.path.expanduser("~/.local/share/taskmate")
 
 Headers = ["Id","Task Name","Description","Status","Priority","Created at","Last Updated at"]
 
@@ -32,14 +35,14 @@ def CurrentTime():
 
 def UpdateId():
     try:
-        with open("id.json","r") as JSONFile:
+        with open(f"{path}/id.json","r") as JSONFile:
             IdList = json.load(JSONFile)
     except FileNotFoundError:
         IdList = [0]
     
     CurrentId = IdList[0] + 1
     IdList.insert(0,CurrentId)
-    with open("id.json",'w') as JSONFile:
+    with open(f"{path}/id.json",'w') as JSONFile:
         json.dump(IdList,JSONFile,indent=4)
     
     return CurrentId
@@ -51,13 +54,13 @@ def AddTask(args):
     TaskList = {"TaskId":currentid,"TaskName":args.name,"TaskDescription":args.description,"TaskStatus":args.status,"TaskPriority":args.priority,"CreatedTime":currenttime,"LastUpdatedTime":currenttime}
 
     try:
-        with open("log.json",'r') as JSONFile:
+        with open(f"{path}/log.json",'r') as JSONFile:
             AlltaskList = json.load(JSONFile)
     except FileNotFoundError:
         AlltaskList = []
     AlltaskList.append(TaskList)
     
-    with open('log.json','w') as JSONFile:
+    with open(f'{path}/log.json','w') as JSONFile:
         json.dump(AlltaskList,JSONFile,indent=4)
     print(f"Task Created Successfully (ID: {currentid})")
 
@@ -79,7 +82,7 @@ AddGroup.set_defaults(func=AddTask)
 
 def ListFilter(filter):
     try:
-        with open('log.json','r') as JSONFile:
+        with open(f'{path}/log.json','r') as JSONFile:
             AllTaskList = json.load(JSONFile)
     except FileNotFoundError:
         print("Add a Task first to list")
@@ -94,7 +97,7 @@ def ListFilter(filter):
 
 def ListAll():
     try:
-        with open('log.json','r') as JSONFile:
+        with open(f'{path}/log.json','r') as JSONFile:
             AllTaskList = json.load(JSONFile)
     except FileNotFoundError:
         print("Add a Task first to list")
@@ -128,7 +131,7 @@ def UpdateTask(args):
     TaskId = int(str(args.id))
 
     try:
-        with open('log.json','r') as JSONFile:
+        with open(f'{path}/log.json','r') as JSONFile:
             AllTaskList = json.load(JSONFile)
     except FileNotFoundError:
         print("Add a Task first to update")
@@ -149,7 +152,7 @@ def UpdateTask(args):
             AllTaskList.pop(TaskId-1)
             AllTaskList.insert(TaskId-1,Taskdict)
     
-    with open('log.json','w') as JSONFile:
+    with open(f'{path}/log.json','w') as JSONFile:
         json.dump(AllTaskList,JSONFile,indent=4)
     
     print('Task Edited Successfully')
@@ -172,13 +175,13 @@ def DeleteTask(args):
 
     if args.id:
         try:
-            with open('log.json','r') as JSONFile:
+            with open(f'{path}/log.json','r') as JSONFile:
                 AllTaskList = json.load(JSONFile)
         except FileNotFoundError:
             print('Add a task first to delete')
         
         try:
-            with open('id.json','r') as IdFile:
+            with open(f'{path}/id.json','r') as IdFile:
                 AllIdList = json.load(IdFile)
         except FileNotFoundError:
             print('Add a task first to delete')
@@ -188,17 +191,17 @@ def DeleteTask(args):
         deletedtask = AllTaskList.pop(int(str(args.id))-1)
         print(f"{deletedtask["TaskName"]} has been successfully deleted")
 
-        with open('log.json','w') as JSONFile:
+        with open(f'{path}/log.json','w') as JSONFile:
             json.dump(AllTaskList,JSONFile,indent=4)
-        with open('id.json','w') as IdFile:
+        with open(f'{path}/id.json','w') as IdFile:
             json.dump(AllIdList,IdFile,indent=4)
 
     else:
         User = input("Do you want to delete all the task's (Y/n) : ")
         if User.lower() == 'Y':
-            with open('log.json','w') as JSONFile:
+            with open(f'{path}/log.json','w') as JSONFile:
                 json.dump([],JSONFile,indent=4)
-            with open('id.json','w') as IdFIle:
+            with open(f'{path}/id.json','w') as IdFIle:
                 json.dump([],IdFIle,indent=4)
             print("All Task's has been successfully deleted")
         else:
@@ -220,7 +223,7 @@ def MarkStatus(args):
     TaskStatus = str(args.status)
 
     try:
-        with open('log.json','r') as JSONFile:
+        with open(f'{path}/log.json','r') as JSONFile:
             AllTaskList = json.load(JSONFile)
     except FileNotFoundError:
         print("Add the Task First to change the status")
@@ -231,7 +234,7 @@ def MarkStatus(args):
             TaskDict['LastUpdatedTime'] = CurrentTime()
             print("Task Status changed successfully")
         
-    with open('log.json','w') as JSONFile:
+    with open(f'{path}/log.json','w') as JSONFile:
         json.dump(AllTaskList,JSONFile,indent=4)
 
 MarkStatusParser = SubParser.add_parser('mark')
@@ -254,7 +257,7 @@ def SortTask(default,status=False,priority=False):
     else:
         TaskKey = 'TaskPriority'
 
-    with open("log.json",'r') as JSONFile:
+    with open(f"{path}/log.json",'r') as JSONFile:
         AllTaskList = json.load(JSONFile)
 
     Sorted = []

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 import json
 from tabulate import tabulate
@@ -175,17 +177,29 @@ def DeleteTask(args):
         except FileNotFoundError:
             print('Add a task first to delete')
         
+        try:
+            with open('id.json','r') as IdFile:
+                AllIdList = json.load(IdFile)
+        except FileNotFoundError:
+            print('Add a task first to delete')
+        
+        AllIdList.pop(len(AllIdList)-int(str(args.id))-1)
+
         deletedtask = AllTaskList.pop(int(str(args.id))-1)
         print(f"{deletedtask["TaskName"]} has been successfully deleted")
 
         with open('log.json','w') as JSONFile:
             json.dump(AllTaskList,JSONFile,indent=4)
+        with open('id.json','w') as IdFile:
+            json.dump(AllIdList,IdFile,indent=4)
 
     else:
         User = input("Do you want to delete all the task's (Y/n) : ")
         if User.lower() == 'Y':
             with open('log.json','w') as JSONFile:
                 json.dump([],JSONFile,indent=4)
+            with open('id.json','w') as IdFIle:
+                json.dump([],IdFIle,indent=4)
             print("All Task's has been successfully deleted")
         else:
             print('Woof!, What a close save')

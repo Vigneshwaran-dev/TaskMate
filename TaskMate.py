@@ -8,6 +8,13 @@ import os
 
 path = os.path.expanduser("~/.local/share/taskmate")
 
+try:
+    with open(f'{path}/id.json','w') as Test:
+        testcontent = json.load(Test)
+except FileNotFoundError:
+    os.mkdir(fr'{os.path.expanduser("~/.local/share")}/taskmate')
+
+
 Headers = ["Id","Task Name","Description","Status","Priority","Created at","Last Updated at"]
 
 Parser = argparse.ArgumentParser(prog="TaskMate",

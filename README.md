@@ -26,12 +26,12 @@ and recently learnt  argparse module
 - Add a Task</h3>
 
 ```
-TaskMate add <TaskName> 
+taskmate add <TaskName> 
 ```
 (optional)
 
 ```
-TaskMate add <TaskName> -d <description> -s <status> -p <priority>
+taskmate add <TaskName> -d <description> -s <status> -p <priority>
 ```
 <h4>Note : status only accepts ['in-progress','done','todo'] defult = todo
 </br>
@@ -41,19 +41,19 @@ Priority only accepts ["low","medium","high"] default="low"</h4>
 - Update Name
 
 ```
-TaskMate update <TaskId> -n <NewTaskName>
+taskmate update <TaskId> -n <NewTaskName>
 ```
 
 - Update Description
 
 ```
-TaskMate update <TaskId> -d <NewTaskDescription>
+taskmate update <TaskId> -d <NewTaskDescription>
 ```
 
 - Update Priority
 
 ```
-TaskMate update <TaskId> -p <NewTaskPriority>
+taskmate update <TaskId> -p <NewTaskPriority>
 ```
 <h3>Note: All the above 3 flags can also be used at the same time </h3>
 </br>
@@ -62,21 +62,21 @@ TaskMate update <TaskId> -p <NewTaskPriority>
 - List All Task
 
 ```
-TaskMate list
+taskmate list
 ```
 
 - List Task Based on their Status
 
 ```
-TaskMate List done 
+taskmate List done 
 ```
 
 ```
-TaskMate List in-progress 
+taskmate List in-progress 
 ```
 
 ```
-TaskMate List todo 
+taskmate List todo 
 ```
 </br>
 <h3>Delete Task's</h3>
@@ -84,17 +84,17 @@ TaskMate List todo
 - Delete Task By Providing Their Id
 
 ```
-TaskMate delete <TaskId>
+taskmate delete <TaskId>
 ```
 - Delete all Task
 
 ```
-TaskMate delete
+taskmate delete
 ```
 <h3>Change the Status of a Task</h3>
 
 ```
-TaskMate mark <TaskId> <NewStatus>
+taskmate mark <TaskId> <NewStatus>
 ```
 The New Status only accepts done , todo , in-progress
 </br>
@@ -104,23 +104,23 @@ The New Status only accepts done , todo , in-progress
     - todo - in-progress -done
 
     ```
-    TaskMate sort -s
+    taskmate sort -s
     ```
     - done - in-progress - done
 
     ```
-    TaskMate sort -S
+    taskmate sort -S
     ```
 - Sort Tasks based on their Priority
     - high - medium - low
 
     ```
-    TaskMate sort -p
+    taskmate sort -p
     ```
     - low - medium - high
 
     ```
-    TaskMate sort -P
+    taskmate sort -P
     ```
 <h3>Note : Sorting Doesn't affect the Main Task Table</h3>
 </br>

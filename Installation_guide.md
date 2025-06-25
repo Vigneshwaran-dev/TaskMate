@@ -1,13 +1,13 @@
 <h1>Steps to Install TaskMate in your computer</h1>
-<h2>Note: create a folder at ~/.local/ named bin so you can execute TaskMate as an app</h2>
-<h2>Open ~/.local/bin</h2>
-
+<h3>Note: create a folder at ~/.local/ named bin so you can execute TaskMate as an app</h3>
+<h3>Open ~/.local/bin</h3>
+<p>clone this repo at ~/.local/bin so you can run this app from anywhere<br>rename it to taskmate in its parent dict<br>change your file mode so u can execute it</p>
 ```
-> git clone https://Vigneshwaran-dev/TaskMate.git # clone this repo at ~/.local/bin so you can run this app from anywhere
+> git clone https://Vigneshwaran-dev/TaskMate.git 
 > cd TaskMate/
-> mv TaskMate.py ~/.local/bin/taskmate # renaming it to taskmate in its parent dict
+> mv TaskMate.py ~/.local/bin/taskmate  
 > cd ..
-> chmode +x taskmate # change your file mode so u can execute it
+> chmod +x taskmate 
 ```
 <hr>
 <h3>Enjoy using TaskMate</h3>

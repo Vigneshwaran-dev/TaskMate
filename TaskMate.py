@@ -7,12 +7,11 @@ from datetime import datetime
 import os
 
 path = os.path.expanduser("~/.local/share/taskmate")
-
+# creates taskmate/ folder at ~/.local/share
 try:
-    with open(f'{path}/id.json','w') as Test:
-        testcontent = json.load(Test)
-except FileNotFoundError:
     os.mkdir(fr'{os.path.expanduser("~/.local/share")}/taskmate')
+except FileExistsError:
+    pass
 
 
 Headers = ["Id","Task Name","Description","Status","Priority","Created at","Last Updated at"]

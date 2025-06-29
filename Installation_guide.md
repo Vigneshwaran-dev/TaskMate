@@ -1,4 +1,4 @@
-<h1>Steps to Install TaskMate in your computer</h1>
+<h1>Steps to Install TaskMate in your computer(linux(debian))</h1>
 
 <h3>Note: create a folder at ~/.local/ named bin so you can execute TaskMate as an app</h3>
 

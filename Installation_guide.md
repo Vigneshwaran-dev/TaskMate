@@ -7,7 +7,7 @@
 <p>clone this repo at ~/.local/bin so you can run this app from anywhere<br>rename it to taskmate in its parent dict<br>change your file mode so u can execute it</p>
 
 ```
-> git clone https://Vigneshwaran-dev/TaskMate.git 
+> git clone https://VigneshwaranK08/TaskMate.git 
 > cd TaskMate/
 > mv TaskMate.py ~/.local/bin/taskmate  
 > cd ..
